@@ -51,7 +51,10 @@ namespace Proye3JoseDRodriguezSemestreI2019
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
+            //un comentario bien ak7
+            //un comentario bien ak7
+            //un comentario bien ak7
+            //un comentario bien ak7
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
@@ -69,3 +72,4 @@ namespace Proye3JoseDRodriguezSemestreI2019
         }
     }
 }
+
