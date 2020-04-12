@@ -63,6 +63,9 @@ namespace Proye3JoseDRodriguezSemestreI2019
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+
+            //que sueño
+
             //enable session before MVC
             //Usa esta linea para habilitar el session
             app.UseSession();
