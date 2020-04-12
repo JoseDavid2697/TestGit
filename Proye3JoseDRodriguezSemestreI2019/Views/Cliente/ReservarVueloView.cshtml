@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewData["Title"] = "ReservarVueloView";
+    Layout = "ClienteNav";
+}
+
+<br />
+<br />
+
+<div class="container-fluid">
+    <h1>Buscar vuelos disponibles</h1>
+    <br />
+    <form>
+        <div class="form-group">
+            <label for="">Fecha de salida</label>
+            <input type="text" class="form-control" id="" placeholder="aaaa-mm-dd">
+        </div>
+        <div class="form-group">
+            <label for="">Fecha de llegada</label>
+            <input type="text" class="form-control" id="" placeholder="aaaa-mm-dd">
+        </div>
+        <div class="form-group">
+            <label for="">Salida</label>
+            <select class="form-control" id="select_destino" name="destino">
+                @foreach (string s in ViewBag.DestinosCliente)
+                {
+                    <option value="@s">@s</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="">Destino</label>
+            <select class="form-control" id="select_destino" name="destino">
+                @foreach (string s in ViewBag.DestinosCliente)
+                {
+                    <option value="@s">@s</option>
+                }
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary" asp-controller="Cliente" asp-action="ListarVuelosView">Buscar</button>
+        <br />
+        <br />
+        <br />
+        <br />
+        
+    </form>
+</div>
+

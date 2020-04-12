@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "DestinosView";
+}
+
+@using Proye3JoseDRodriguezSemestreI2019.Models
+
+<br />
+<br />
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-lg-12 col-md-12 col-md-12">
+            @foreach (Destino d in ViewBag.DestinosInfo)
+            {
+                <div class="card">
+                    <h5 class="card-header">Destino</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">@d.nombre_destino</h5>
+                        <p class="card-text">@d.descripcion</p>
+                    </div>
+                </div>
+                <br />
+                <br />
+            }
+        </div>
+
+    </div>
+</div>

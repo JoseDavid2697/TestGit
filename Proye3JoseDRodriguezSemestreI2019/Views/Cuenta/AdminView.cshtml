@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewData["Title"] = "AdminView";
+    Layout = "AdminNav";
+}
+
+<br>
+<br>
+<br>
+
+<div class="container-fluid">
+    <h1>Módulo administrativo</h1>
+    <p>En este módulo puede encontrar la lista de acciones disponibles, seleccione la deseada para desplegar la vista respectiva</p>
+    <hr />
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+
+            <!-- Sidebar -->
+            <div class="list-group" style="margin-bottom: 20px;">
+                <a asp-controller="Cuenta" asp-action="cargarVistaCrearVuelos" class="list-group-item list-group-item-action">Crear vuelos</a>
+                <a asp-controller="Cuenta" asp-action="cargarVistaCrearDescuentos" class="list-group-item list-group-item-action">Crear códigos de descuento</a>
+                <a asp-controller="Cuenta" asp-action="cargarVistaVentas" class="list-group-item list-group-item-action">Ver informe de ventas</a>
+                <a asp-controller="Cuenta" asp-action="cargarVistaCrearAdmin" class="list-group-item list-group-item-action">Crear nuevo administrador</a>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-4 col-sm-4">
+            <h5 class="card-title">UCR Airlines</h5>
+            <hr id="hr"/>
+            <h6 class="card-subtitle mb-2 text-muted">Bienvenido</h6>
+            <p class="card-text">Podés crear nuevos administradores, crear vuelos y más en este módulo.</p>
+            <br />
+            <br />
+        </div>
+
+    </div>
+
+</div>
+<br>
+<br>
+<br>
+<hr />
+<style>
+    a{
+        color:red !important;
+        font-weight:bold !important;
+    }
+
+    a:hover{
+        font-size: 16px !important;
+    }
+
+    h5{
+        text-decoration: underline !important;
+        color:darkblue !important;
+    }
+
+    h1{
+        color: darkblue !important;
+    }
+
+</style>
+

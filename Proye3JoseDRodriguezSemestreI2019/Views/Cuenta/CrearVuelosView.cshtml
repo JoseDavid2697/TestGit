@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewData["Title"] = "CrearVuelosView";
+    Layout = "AdminNav";
+}
+
+@using Microsoft.AspNetCore.Http;
+
+<br>
+<br>
+<br>
+
+<div class="container-fluid">
+    <h1>Módulo administrativo</h1>
+    <p>En este módulo puede encontrar la lista de acciones disponibles, seleccione la deseada para desplegar la vista respectiva</p>
+    <hr />
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+
+            <!-- Sidebar -->
+            <div class="list-group" style="margin-bottom: 20px;">
+                <a asp-controller="Cuenta" asp-action="cargarVistaCrearVuelos" class="list-group-item list-group-item-action">Crear vuelos</a>
+                <a asp-controller="Cuenta" asp-action="cargarVistaCrearDescuentos" class="list-group-item list-group-item-action">Crear códigos de descuento</a>
+                <a asp-controller="Cuenta" asp-action="cargarVistaVentas" class="list-group-item list-group-item-action">Ver informe de ventas</a>
+                <a asp-controller="Cuenta" asp-action="cargarVistaCrearAdmin" class="list-group-item list-group-item-action">Crear nuevo administrador</a>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-4 col-sm-4">
+            <h5 class="card-title">Crear vuelos</h5>
+            <form id="crear_vuelo" asp-action="crearVuelo" method="post">
+                <div class="form-group">
+                    <label for="">Lugar de salida:</label>
+                    <select class="form-control" id="select_salida" name="lugar_salida">
+                        @foreach (string s in ViewBag.Destinos)
+                        {
+                            <option value="@s">@s</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">Lugar de destino:</label>
+                    <select class="form-control" id="select_destino" name="destino">
+                        @foreach (string s in ViewBag.Destinos)
+                        {
+                            <option value="@s">@s</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">Fecha de salida:</label>
+                    <input type="text" class="form-control" id="f_salida" name="fecha_salida" value="aaaa-mm-dd" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Fecha de llegada:</label>
+                    <input type="text" class="form-control" id="f_llegada" name="fecha_llegada" value="aaaa-mm-dd" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Avión:</label>
+                    <select class="form-control" id="select_avion" name="avion">
+                        @foreach (string s in ViewBag.Aviones)
+                        {
+                            <option value="@s">@s</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">Código:</label>
+                    <input type="text" id="codigo_vuelo" name="codigo" value="" />
+                    <button type="button" class="btn btn-primary" id="btn_generar_codigo">Generar</button>
+                </div>
+                <button type="submit" class="btn btn-primary" id="btn_registrar_vuelo">Registrar vuelo</button>
+            </form>
+            <br />
+            <br />
+        </div>
+
+    </div>
+
+</div>
+<br>
+<br>
+<br>
+<hr />
+<script type="text/javascript">
+    $(function () {
+        $('#btn_generar_codigo').click(function (e) {
+            var parametros = {
+                "select_salida": $('#select_salida').val(),
+                "select_destino": $('#select_destino').val()
+            };
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("generarCodigoVuelo")',
+                data: parametros
+            }).done(function (response) {
+                //Successfully pass to server and get response
+                $('#codigo_vuelo').val(response);
+            });
+        });
+
+    });
+
+</script>
+<style>
+    a {
+        color: red !important;
+        font-weight: bold !important;
+    }
+
+        a:hover {
+            font-size: 16px !important;
+        }
+
+    h5 {
+        text-decoration: underline !important;
+        color: darkblue !important;
+    }
+
+    h1 {
+        color: darkblue !important;
+    }
+</style>
+
+
+

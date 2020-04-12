@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewData["Title"] = "LlenarReservaView";
+}
+
+@{
+    Layout = "ClienteNav";
+}
+
+@using Microsoft.AspNetCore.Http;
+
+<br />
+<br />
+
+<div class="container-fluid">
+    <h1>Formulario de Reserva</h1>
+    <form asp-controller="Cliente" asp-action="realizarPago">
+        <div class="form-group">
+            <label for="tipo_boleto">Tipo de boleto</label>
+            <select class="form-control" id="tipo_boleto" name="tipo_boleto">
+                <option>Round-Trip</option>
+                <option>Ida</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="">Cantidad de asientos deseada</label>
+            <input type="number" class="form-control" id="cantidad_asientos" name="cantidad_asientos" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="clase">Clase</label>
+            <br />
+            <small>Económica: $100</small>
+            <br />
+            <small>Media: $200</small>
+            <br />
+            <small>Premium: $300</small>
+            <select class="form-control" id="clase" name="clase">
+                <option value="Económica">Económica</option>
+                <option value="Media">Media</option>
+                <option value="Premium">Premium</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="">Código de Reserva</label>
+            <input type="text" class="form-control" id="codigo_reserva" name="codigo_reserva" placeholder="">
+            <br />
+            <button type="button" class="btn btn-primary" id="btn_generar_codigo">Generar</button>
+        </div>
+        <div class="form-group">
+            <label for="">Código de vuelo</label>
+            <input type="text" class="form-control" id="codigo_vuelo" name="codigo_vuelo" value="@ViewData["codigo_vuelo_elegido"]">
+        </div>
+        <div class="form-group">
+            <label for="">Email cliente</label>
+            <input type="text" class="form-control" id="correo_cliente" name="correo_cliente" value="@Context.Session.GetString("userEmail")">
+        </div>
+        <button type="submit" class="btn btn-primary">Pagar</button>
+        <button type="button" class="btn btn-primary" id="btn_carrito">Agregar al carrito</button>
+        <small id="carrito_m"></small>
+    </form>
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <script type="text/javascript">
+    $(function () {
+        $('#btn_generar_codigo').click(function (e) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("generarCodigoReserva")',
+                data: null
+            }).done(function (response) {
+                //Successfully pass to server and get response
+                $('#codigo_reserva').val(response);
+            });
+        });
+
+    });
+
+    </script>
+
+    <script type="text/javascript">
+    $(function () {
+        $('#btn_carrito').click(function (e) {
+            var parametros = {
+                "tipo_boleto": $('#tipo_boleto').val(),
+                "cantidad_asientos": $('#cantidad_asientos').val(),
+                "clase": $('#clase').val(),
+                "codigo_reserva": $('#codigo_reserva').val(),
+                "codigo_vuelo": $('#codigo_vuelo').val(),
+                "correo_cliente": $('#correo_cliente').val()
+            }
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("agregarAlCarrito")',
+                data: parametros
+            }).done(function (response) {
+                //Successfully pass to server and get response
+                $('#carrito_m').html(response);
+            });
+        });
+
+    });
+
+    </script>
+</div>

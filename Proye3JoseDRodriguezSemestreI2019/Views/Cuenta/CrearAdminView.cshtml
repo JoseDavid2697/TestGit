@@ -1,0 +1,98 @@
+﻿@model Proye3JoseDRodriguezSemestreI2019.Models.Administrador
+@{
+    ViewData["Title"] = "CrearAdminView";
+    Layout = "AdminNav";
+
+}
+
+
+<br>
+<br>
+<br>
+
+<div class="container-fluid">
+    <h1>Módulo administrativo</h1>
+    <p>En este módulo puede encontrar la lista de acciones disponibles, seleccione la deseada para desplegar la vista respectiva</p>
+    <hr />
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+
+            <!-- Sidebar -->
+            <div class="list-group" style="margin-bottom: 20px;">
+                <a asp-controller="Cuenta" asp-action="cargarVistaCrearVuelos" class="list-group-item list-group-item-action">Crear vuelos</a>
+                <a asp-controller="Cuenta" asp-action="cargarVistaCrearDescuentos" class="list-group-item list-group-item-action">Crear códigos de descuento</a>
+                <a asp-controller="Cuenta" asp-action="cargarVistaVentas" class="list-group-item list-group-item-action">Ver informe de ventas</a>
+                <a asp-controller="Cuenta" asp-action="cargarVistaCrearAdmin" class="list-group-item list-group-item-action">Crear nuevo administrador</a>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-4 col-sm-4">
+            <h5>Crear nuevo administrador</h5>
+            <form id="crear_admin" asp-action="crearNuevoAdmin" method="post">
+                <div class="form-group">
+                    <label for="nombre_usuario">Nombre de usuario:</label>
+                    <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario" required>
+                </div>
+                <div class="form-group">
+                    <label for="contrasena">Contraseña</label>
+                    <input type="password" class="form-control" id="contrasena" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm_password_admin">Confirmar contraseña</label>
+                    <input type="password" class="form-control" id="confirm_password_admin" name="contrasena" required>
+                </div>
+                <span id="confirm-message" class="confirm-message"></span>
+                <br />
+                <button type="submit" class="btn btn-primary" id="btn_registrar_admin" disabled>Registrar</button>
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+<br>
+<br>
+<br>
+<hr />
+<script type="text/javascript">
+    $(function () {
+        $('#crear_admin [type="password"]').keyup(function () {
+
+            var password = $('#contrasena');
+            var confirm = $('#confirm_password_admin');
+            var message = $('#confirm-message');
+            var button = $('#btn_registrar_admin');
+
+
+            var good_color = "#66cc66";
+            var bad_color = "#ff6666";
+            if (password.val() == confirm.val()) {
+                confirm.css('background-color', good_color);
+                message.css('color', good_color).html("Las contraseñas coinciden!");
+                button.attr("disabled", false);
+            } else {
+                confirm.css('background-color', bad_color);
+                message.css('color', bad_color).html("Las contraseñas no coinciden!");
+                button.attr("disabled", true);
+            }
+        });
+    });
+</script>
+<style>
+    a {
+        color: red !important;
+        font-weight: bold !important;
+    }
+
+    h5 {
+        color: darkblue !important;
+        text-decoration: underline !important;
+        text-decoration-color: darkblue !important;
+    }
+
+    h1 {
+        color: darkblue !important;
+    }
+</style>
+
+

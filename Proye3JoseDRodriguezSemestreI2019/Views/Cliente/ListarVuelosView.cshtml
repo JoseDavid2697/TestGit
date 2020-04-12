@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewData["Title"] = "ListarVuelosView";
+
+}
+
+@{
+    Layout = "ClienteNav";
+}
+
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+
+@model X.PagedList.IPagedList<Vuelo>
+
+<h2>VuelosView</h2>
+
+<div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Salida</th>
+                <th>Destino</th>
+                <th>Fecha Salida</th>
+                <th>Fecha Llegada</th>
+                <th>Avion</th>
+                <th>Asientos disponibles</th>
+
+            </tr>
+        </thead>
+        <tbody id="content">
+            @foreach (Vuelo v in Model)
+            {
+                <tr>
+                    <td>@v.codigo</td>
+                    <td>@v.lugar_salida</td>
+                    <td>@v.destino</td>
+                    <td>@v.fecha_salida</td>
+                    <td>@v.fecha_llegada</td>
+                    <td>@v.avion</td>
+                    <td>@v.asientos</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div id="container" style="margin-left: 20px">
+        <p></p>
+        <p></p>
+        <div class="row" style="margin-left: 400px">
+            <br />
+            <div class="col-6">
+                @Html.PagedListPager((IPagedList)Model, page => Url.Action("ListarVuelosView", new { page }))
+            </div>
+            <div class="col-6">
+
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+
+            </div>
+        </div>
+        <form asp-controller="Cliente" asp-action="cargarVistaLlenarReserva" method="post">
+            <div class="form-group">
+                <br />
+                <label for="codigo_vuelo_elegido">Código de vuelo</label>
+                <br />
+                <input type="text" class="form-control" id="codigo_vuelo_elegido" name="codigo_vuelo_elegido">
+            </div>
+            <button type="submit" class="btn btn-primary">Seleccionar</button>
+            <br />
+            <br />
+            <br />
+            <br />
+        </form>
+
+    </div>
+</div>
