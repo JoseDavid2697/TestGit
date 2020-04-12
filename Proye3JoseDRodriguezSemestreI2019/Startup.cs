@@ -55,6 +55,10 @@ namespace Proye3JoseDRodriguezSemestreI2019
             //un comentario bien ak7
             //un comentario bien ak7
             //un comentario bien ak7
+
+
+
+            //Jose comento aqui 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
